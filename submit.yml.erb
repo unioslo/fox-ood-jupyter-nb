@@ -1,0 +1,32 @@
+batch_connect:
+  template: "basic"
+
+script:
+  job_name: "OOD Jupyter"
+  native: [
+            "-c", "<%= ec_cpus.blank?  ? 1 : ec_cpus.to_i %>",
+           <%- if ec_gpus.to_i > 0 -%>
+              <%- case ec_alacarte -%>
+                <%- when 'RTX30' -%>
+                  "--partition=accel",
+                  "--gres=gpu:rtx30:<%= ec_gpus.to_i %>",
+                <%- when 'A100' -%>
+                  "--partition=accel",
+                  "--gres=gpu:a100:<%= ec_gpus.to_i %>",
+                <%- when 'MIG' -%>
+                  "--partition=mig",
+                  "-G", "<%= ec_gpus.to_i %>",
+                <%- else -%>
+                  "--partition=accel",
+                  "-G", "<%= ec_gpus.to_i %>",
+                <%- end -%>
+
+            <%- else -%>
+                "--partition=normal",
+            <%- end -%>
+
+            <%- if not ec_mem.blank? -%>
+                "--mem", "<%= ec_mem.to_i %>G"
+            <%- end -%>
+
+          ]

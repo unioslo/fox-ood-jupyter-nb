@@ -1,0 +1,13 @@
+---
+name: Jupyter Notebook
+category: Interactive Apps
+subcategory: Jupyter
+role: batch_connect
+description: |
+        This app will launch Jupyter Notebook on Fox.<br><br>
+        
+        <hr>
+        <b>Choose job options:</b>
+
+tile:
+  sub_caption: "Notebook"

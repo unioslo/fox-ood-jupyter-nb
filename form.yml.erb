@@ -1,0 +1,95 @@
+---
+cluster: "fox"
+
+form:
+  - auto_accounts
+  - ec_alacarte
+  - bc_num_hours
+  - auto_modules_JupyterNotebook
+  - ec_modulepath
+  - ec_modules
+  - jupyter_version
+  - ec_extra_jupyter_args
+  - ec_cpus
+  - ec_mem
+  - ec_gpus
+
+attributes:
+
+<%= FormTemplate.fox_alacarte %>
+
+  bc_num_hours:
+    label: "Runtime (in hours)"
+
+  jupyter_version:
+    widget: "hidden_field"
+    value: "notset"
+
+  auto_modules_JupyterNotebook:
+    label: "Choose Jupyter module (required)"
+    default: false
+
+  jupyter_envtype:
+    label: "Choose environment type (required)"
+    widget: "select"
+    value: "0"
+    options:
+      - [ 
+          "Python virtualenv", "0",
+          data-set-jupyter-version: "venv",
+        ]
+      - [ 
+          "Conda environment", "1",
+          data-set-jupyter-version: "conda",
+        ]
+
+  auto_modules_Python:
+    label: "Choose the Python version you built the env with"
+    default: false
+    data-hide-env-path: true
+
+  env_path:
+    widget: "text_field"
+    label: "Environment path: (required)"
+    help: |
+      <small>The path is relative to your $HOME. E.g use `my-environment` for $HOME/my-environment or `/fp/projects01/ec01/jupyter/my-environemnt` to use a shared install</small>
+
+  auto_accounts:
+    label: "Choose the Educloud project to run under:"
+    help: |
+     <small>If you are unsure, ask the project principal</small>
+
+  ec_cpus:
+    label: "Number of CPU cores:"
+    widget: "number_field"
+    required: true
+
+  ec_gpus:
+    label: "Number of GPUs:"
+    widget: "number_field"
+    required: true
+
+  ec_mem:
+    label: "RAM (in GB):"
+    value: "1"
+    widget: "number_field"
+    required: true
+
+  ec_modulepath:
+    label: "Additional module path (optional)"
+    widget: "text_field"
+    help: |
+                  <small>Add your own EasyBuild modulepath (optional)</small>
+  ec_modules:
+    label: "Additional modules (optional)"
+    widget: "text_field"
+    help: |
+        <small>Space separated list of additional modules to load (optional)</small></br/>
+
+  ec_extra_jupyter_args:
+    label: "Additional Jupyter arguments (optional)"
+    widget: "text_field"
+    help: |
+      <small>Add extra command line arguments</small>
+
+
