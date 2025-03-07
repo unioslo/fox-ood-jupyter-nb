@@ -23,10 +23,6 @@ module use -a <%= context.ec_modulepath %>
 module load <%= context.ec_modules %>
 <%- end -%>
 
-<%- if context.ec_alacarte == "gpu" -%>
-#module load CUDA/12.0.0
-<%- end -%>
-
 # List loaded modules
 module list
 
