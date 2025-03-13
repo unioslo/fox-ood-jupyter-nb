@@ -23,10 +23,6 @@ module use -a <%= context.ec_modulepath %>
 module load <%= context.ec_modules %>
 <%- end -%>
 
-<%- if context.ec_alacarte == "gpu" -%>
-#module load CUDA/12.0.0
-<%- end -%>
-
 # List loaded modules
 module list
 
@@ -38,6 +34,6 @@ set -x
 
 #export JUPYTERLAB_SETTINGS_DIR=${HOME}/.jupyter/lab/user-settings/
 
-module load <%= context.auto_modules_JupyterNotebook %>
+module load <%= context.auto_modules_jupyternotebook %>
 
 jupyter notebook --config="${CONFIG_FILE}" <%= context.ec_extra_jupyter_args %>
