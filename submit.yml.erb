@@ -2,7 +2,7 @@ batch_connect:
   template: "basic"
 
 script:
-  job_name: "OOD Jupyter"
+  job_name: "OOD Jupyter Notebook"
   native: [
             "-c", "<%= ec_cpus.blank?  ? 1 : ec_cpus.to_i %>",
            <%- if ec_gpus.to_i > 0 -%>
@@ -34,11 +34,13 @@ script:
                 <%- end -%>
 
             <%- else -%>
-                "--partition=normal",
+              "--partition=normal",
             <%- end -%>
 
             <%- if not ec_mem.blank? -%>
-                "--mem", "<%= ec_mem.to_i %>G"
+              "--mem", "<%= ec_mem.to_i %>G",
             <%- end -%>
+
+            <%- if ec_mail_on_start -%>                                                                                                                                                                                                                                                               "--mail-type=BEGIN",                                                                                                                                                                                                                                                                  <%- end -%>
 
           ]
